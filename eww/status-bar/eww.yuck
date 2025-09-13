@@ -1,0 +1,11 @@
+(defwindow  status-bar
+            :monitor 0
+            :geometry (geometry :x "0%"
+                                :y "0%"
+                                :width "60px"
+                                :height "100%"
+                                :anchor "left center")
+            :stacking "fg"
+            :exclusive true
+            :focusable false
+  "hi there")
