@@ -3,6 +3,10 @@ $foreground: #ffffff;
 
 .status-bar {
   color: $foreground;
-  background-color: $background;
+  background-color: transparent;
   margin: 10px;
+}
+
+.time_wrapper {
+  
 }

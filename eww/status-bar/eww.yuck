@@ -1,4 +1,25 @@
-(defwindow  status-bar
+;; Time Widget
+(defpoll time_hour  :interval "1s"
+                    :run-while true
+  `date +%H`)
+(defpoll time_min   :interval "1s"
+                    :run-while true
+  `date +%M`)
+(defwidget time []
+            (box  :class "time_wrapper"
+                  :orientation "v"
+                  :space-evenly false
+                  (box  :class "time_h_display"
+                        :orientation "vertical"
+                        :halign "center"
+                    time_hour)
+                  (box  :class "time_m_display"
+                        :orientation "vertical"
+                        :halign "center"
+                    time_min)))
+
+;; Status Bar
+(defwindow status-bar
             :monitor 0
             :geometry (geometry :x "0%"
                                 :y "0%"
@@ -8,4 +29,4 @@
             :stacking "fg"
             :exclusive true
             :focusable false
-  "hi there")
+  (time))
