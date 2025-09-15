@@ -1,0 +1,21 @@
+;; Monitor Info
+(defpoll monitor_info :interval "60s"
+                      `hyprctl monitors -j`)
+;; Image of Wallpaper 
+(defvar wallpaper_path "/home/david/Pictures/Wallpapers/Minimal_Squares.png")
+(defwidget wallpaper_img [img_path]
+            (image  :path img_path
+                    :image-width {monitor_info[0].width}
+                    :image-height {monitor_info[0].width}))
+;; Wallpaper Image
+(defwindow wallpaper
+            :monitor 0
+            :geometry (geometry :x "0%"
+                                :y "0%"
+                                :width "100%"
+                                :height "100%"
+                                :anchor "right center")
+            :stacking "bottom"
+            :exclusive false
+            :focusable false
+            (wallpaper_img :img_path wallpaper_path))

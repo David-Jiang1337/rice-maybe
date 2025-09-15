@@ -5,7 +5,7 @@ $light-red: #f87575;
 $mint: #52b788;
 $picton-blue: #00a8e8;
 
-$background1: $jet;
+$background1: $onyx;
 $background2: $eerie-black;
 $background3: $walnut-brown;
 $accent1: $light-red;
@@ -13,12 +13,8 @@ $accent2: $mint;
 $accent3: $picton-blue;
 $foreground: #ffffff;
 
-* {
-  all: unset;
-  font-family: "monospace", "Symbols Nerd Font";
-}
-
 .status_bar {
+  font-family: "monospace";
   color: $foreground;
   background-color: transparent;
 }
@@ -45,14 +41,5 @@ $foreground: #ffffff;
   font-weight: bold;
 }
 
-.button {
-  background-color: transparent;
-}
-
 .shutdown_button {
-  font-size: 32px;
-  font-weight: normal;
-  color: $accent1;
-  background-color: transparent;
-  padding: 6px;
 }

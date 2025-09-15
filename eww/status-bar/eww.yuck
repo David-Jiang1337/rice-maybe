@@ -6,27 +6,58 @@
                     :run-while true
   `date +%M`)
 (defwidget time []
-            (box  :class "time_wrapper"
+            (box  :class "widget_box"
                   :orientation "v"
                   :space-evenly false
+                  :spacing 2
                   (box  :class "time_h_display"
                         :orientation "vertical"
                         :halign "center"
-                    time_hour)
+                        time_hour)
                   (box  :class "time_m_display"
                         :orientation "vertical"
                         :halign "center"
-                    time_min)))
+                        time_min)))
+;; Shutdown widget
+(defwidget power []
+            (button :class "shutdown_button"
+                    :tooltip "Shut down"
+                    :onclick "shutdown now"
+                    ""))
+;; Container for widgets that will be at the top of the bar
+(defwidget top_container []
+            (box  :class "subtray"
+                  :valign "start"
+                  :orientation "v"))
+
+;; Container for widgets in the middle
+(defwidget middle_container []
+            (box  :class "subtray"
+                  :orientation "v"))
+
+;; Container for widgets at the bottom
+(defwidget bottom_container []
+            (box  :class "subtray"
+                  :valign "end"
+                  :orientation "v"
+                  :space-evenly false
+                  :spacing 10
+                  (time)
+                  (power)))
 
 ;; Status Bar
-(defwindow status-bar
+(defwindow status_bar
             :monitor 0
             :geometry (geometry :x "0%"
                                 :y "0%"
-                                :width "60px"
+                                :width "90px"
                                 :height "100%"
                                 :anchor "left center")
             :stacking "fg"
             :exclusive true
             :focusable false
-  (time))
+            (centerbox  :class "widget_tray"
+                        :orientation "v"
+                        (top_container)
+                        (middle_container)
+                        (bottom_container)))
