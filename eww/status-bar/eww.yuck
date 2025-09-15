@@ -6,58 +6,78 @@
                     :run-while true
   `date +%M`)
 (defwidget time []
-            (box  :class "widget_box"
-                  :orientation "v"
-                  :space-evenly false
-                  :spacing 2
-                  (box  :class "time_h_display"
-                        :orientation "vertical"
-                        :halign "center"
-                        time_hour)
-                  (box  :class "time_m_display"
-                        :orientation "vertical"
-                        :halign "center"
-                        time_min)))
+  (box  :class "widget-box"
+        :orientation "v"
+        :space-evenly false
+        :spacing 2
+        (box  :class "time-h-display"
+              :orientation "vertical"
+              :halign "center"
+              time_hour)
+        (box  :class "time-m-display"
+              :orientation "vertical"
+              :halign "center"
+              time_min)))
+
+;; Reusable Radial Gauge
+(defwidget radialgauge  [value text]
+  (circular-progress  :value value
+                      :start-at 0
+                      :thickness 2
+                      (label  :text text
+                              :limit-width 2
+                              :show-truncated false
+                              :wrap false
+                              :angle 0.0)))
+
+;; CPU Usage Widget
+(defwidget cpuusage []
+  (box  :class "cpu-gauge-wrapper"
+    (radialgauge  :value 0
+                  :text "hello there")))
+
 ;; Shutdown widget
 (defwidget power []
-            (button :class "shutdown_button"
-                    :tooltip "Shut down"
-                    :onclick "shutdown now"
-                    ""))
+  (button :class "shutdown-button"
+            :tooltip "Shut down"
+            :onclick "shutdown now"
+            ""))
+
 ;; Container for widgets that will be at the top of the bar
-(defwidget top_container []
-            (box  :class "subtray"
-                  :valign "start"
-                  :orientation "v"))
+(defwidget topcontainer []
+  (box  :class "subtray"
+        :valign "start"
+        :orientation "v"))
 
 ;; Container for widgets in the middle
-(defwidget middle_container []
-            (box  :class "subtray"
-                  :orientation "v"))
+(defwidget middlecontainer []
+  (box  :class "subtray"
+        :orientation "v"))
 
 ;; Container for widgets at the bottom
-(defwidget bottom_container []
-            (box  :class "subtray"
-                  :valign "end"
-                  :orientation "v"
-                  :space-evenly false
-                  :spacing 10
-                  (time)
-                  (power)))
+(defwidget bottomcontainer []
+  (box  :class "subtray"
+        :valign "end"
+        :orientation "v"
+        :space-evenly false
+        :spacing 10
+        (cpuusage)
+        (time)
+        (power)))
 
 ;; Status Bar
-(defwindow status_bar
-            :monitor 0
-            :geometry (geometry :x "0%"
-                                :y "0%"
-                                :width "90px"
-                                :height "100%"
-                                :anchor "left center")
-            :stacking "fg"
-            :exclusive true
-            :focusable false
-            (centerbox  :class "widget_tray"
-                        :orientation "v"
-                        (top_container)
-                        (middle_container)
-                        (bottom_container)))
+(defwindow statusbar
+  :monitor 0
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "90px"
+                      :height "100%"
+                      :anchor "left center")
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  (centerbox  :class "widget-tray"
+              :orientation "v"
+              (topcontainer)
+              (middlecontainer)
+              (bottomcontainer)))

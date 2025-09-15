@@ -5,9 +5,9 @@ $light-red: #f87575;
 $mint: #52b788;
 $picton-blue: #00a8e8;
 
-$background1: $jet;
-$background2: $eerie-black;
-$background3: $walnut-brown;
+$background0: $jet;
+$background1: $eerie-black;
+$accent0: $walnut-brown;
 $accent1: $light-red;
 $accent2: $mint;
 $accent3: $picton-blue;
@@ -18,13 +18,13 @@ $foreground: #ffffff;
   font-family: "monospace", "Symbols Nerd Font";
 }
 
-.status_bar {
+.statusbar {
   color: $foreground;
   background-color: transparent;
 }
 
-.widget_tray {
-  background-color: $background1;
+.widget-tray {
+  background-color: $background0;
   padding: 10px;
   margin: 20px 0px 20px 20px;
   border-radius: 10px;
@@ -34,14 +34,14 @@ $foreground: #ffffff;
   background-color: transparent;
 }
 
-.widget_box {
-  background-color: $background2;
+.widget-box {
+  background-color: $background1;
   padding: 12px;
   font-size: 16px;
   border-radius: 8px
 }
 
-.time_h_display {
+.time-h-display {
   font-weight: bold;
 }
 
@@ -49,7 +49,7 @@ $foreground: #ffffff;
   background-color: transparent;
 }
 
-.shutdown_button {
+.shutdown-button {
   font-size: 32px;
   font-weight: normal;
   color: $accent1;
