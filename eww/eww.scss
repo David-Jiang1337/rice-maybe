@@ -23,11 +23,9 @@ $foreground: #ffffff;
   background-color: transparent;
 }
 
-.widget-tray {
-  background-color: $background0;
-  padding: 10px;
+.outer_bar_wrapper {
+  background-color: transparent;
   margin: 20px 0px 20px 20px;
-  border-radius: 10px;
 }
 
 .subtray {
@@ -35,7 +33,7 @@ $foreground: #ffffff;
 }
 
 .widget-box {
-  background-color: $background1;
+  background-color: transparent;
   padding: 12px;
   font-size: 16px;
   border-radius: 8px
@@ -46,13 +44,14 @@ $foreground: #ffffff;
 }
 
 .button {
-  background-color: transparent;
-}
-
-.shutdown-button {
   font-size: 32px;
   font-weight: normal;
-  color: $accent1;
+  color: $foreground;
   background-color: transparent;
   padding: 6px;
+  transition-duration: 0.15s;
+}
+
+.shutdown:hover {
+  color: $accent1;
 }

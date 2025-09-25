@@ -1,12 +1,10 @@
 ;; Monitor Info
-(defpoll monitor_info :interval "60s"
-                      `hyprctl monitors -j`)
 ;; Image of Wallpaper 
 (defvar wallpaper_path "/home/david/Pictures/Wallpapers/Minimal_Squares.png")
 (defwidget wallpaperimg [img_path]
             (image  :path img_path
-                    :image-width {monitor_info[0].width}
-                    :image-height {monitor_info[0].width}))
+                    :image-width {monitor_info.width}
+                    :image-height {monitor_info.width}))
 ;; Wallpaper Image
 (defwindow wallpaper
             :monitor 0
