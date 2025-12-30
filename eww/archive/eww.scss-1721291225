@@ -1,0 +1,57 @@
+$jet: #262a2b;
+$eerie-black: #1d2021;
+$walnut-brown: #504945;
+$light-red: #f87575;
+$mint: #52b788;
+$picton-blue: #00a8e8;
+
+$background0: $jet;
+$background1: $eerie-black;
+$accent0: $walnut-brown;
+$accent1: $light-red;
+$accent2: $mint;
+$accent3: $picton-blue;
+$foreground: #ffffff;
+
+* {
+  all: unset;
+  font-family: "monospace", "Symbols Nerd Font";
+}
+
+.statusbar {
+  color: $foreground;
+  background-color: transparent;
+}
+
+.outer_bar_wrapper {
+  background-color: transparent;
+  margin: 20px 0px 20px 20px;
+}
+
+.subtray {
+  background-color: transparent;
+}
+
+.widget-box {
+  background-color: transparent;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px
+}
+
+.time-h-display {
+  font-weight: bold;
+}
+
+.button {
+  font-size: 32px;
+  font-weight: normal;
+  color: $foreground;
+  background-color: transparent;
+  padding: 6px;
+  transition-duration: 0.15s;
+}
+
+.shutdown:hover {
+  color: $accent1;
+}

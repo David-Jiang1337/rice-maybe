@@ -1,0 +1,4 @@
+(defpoll monitor_info :interval "60s"
+                      `hyprctl monitors -j | jq .[0]`)
+(include "./status-bar/eww.yuck")
+(include "./wallpaper/eww.yuck")
