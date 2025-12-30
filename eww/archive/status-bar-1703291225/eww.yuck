@@ -1,0 +1,161 @@
+;; Some properties of the screen and bar
+(defvar bar_total_width 90)
+(defvar border_radius 13)
+(defvar outer_padding 20)
+
+;; Time Widget
+(defpoll time_hour  :interval "1s"
+                    :run-while true
+  `date +%H`)
+(defpoll time_min   :interval "1s"
+                    :run-while true
+  `date +%M`)
+(defwidget time []
+  (box  :class "widget-box"
+        :orientation "v"
+        :space-evenly false
+        :spacing 2
+        (box  :class "time-h-display"
+              :orientation "vertical"
+              :halign "center"
+              time_hour)
+        (box  :class "time-m-display"
+              :orientation "vertical"
+              :halign "center"
+              time_min)))
+
+;; Reusable Radial Gauge
+(defwidget radialgauge  [value text]
+  (circular-progress  :value value
+                      :start-at 0
+                      :thickness 2
+                      (label  :text text
+                              :limit-width 2
+                              :show-truncated false
+                              :wrap false
+                              :angle 0.0)))
+
+;; CPU Usage Widget
+(defwidget cpuusage []
+  (box  :class "cpu-gauge-wrapper"
+    (radialgauge  :value 0
+                  :text "hello there")))
+
+;; Shutdown widget
+(defwidget power []
+  (button :class "shutdown button"
+            :tooltip "Shut down"
+            :onclick "shutdown now"
+            ""))
+
+;; Container for widgets that will be at the top of the bar
+(defwidget topcontainer []
+  (box  :class "subtray"
+        :valign "start"
+        :orientation "v"))
+
+;; Container for widgets in the middle
+(defwidget middlecontainer []
+  (box  :class "subtray"
+        :orientation "v"))
+
+;; Container for widgets at the bottom
+(defwidget bottomcontainer []
+  (box  :class "subtray"
+        :valign "end"
+        :orientation "v"
+        :space-evenly false
+        :spacing 10
+        (cpuusage)
+        (time)
+        (power)))
+
+;; Border Styling
+(defvar corner_img "/home/david/dotfiles/eww/assets/border_corner.png")
+(defvar top_bot_img "/home/david/dotfiles/eww/assets/border_wall.png")
+(defvar side_img "/home/david/dotfiles/eww/assets/border_wall_side.png")
+
+(defwidget cornerborder [orientation]
+  (transform  :rotate {orientation * 25}
+              :transform-origin-x "50%"
+              :transform-origin-y "50%"
+              (image  :path corner_img
+                      :image-width border_radius
+                      :image-height border_radius
+                      :preserve-aspect-ratio true)))
+
+(defwidget topbotborder [orientation width]
+  (transform  :rotate {orientation * 25}
+              :transform-origin-x "50%"
+              :transform-origin-y "50%"
+              (image  :path top_bot_img
+                      :image-width width
+                      :image-height border_radius
+                      :preserve-aspect-ratio false)))
+
+(defwidget sideborder [orientation height]
+  (transform  :rotate {orientation * 25}
+              :transform-origin-x "50%"
+              :transform-origin-y "50%"
+              (image  :path side_img
+                      :image-width border_radius
+                      :image-height height
+                      :preserve-aspect-ratio false)))
+
+;; Bar Components
+(defwidget bartop []
+  (box  :orientation "h"
+        :valign "start"
+        :halign "start"
+        :space-evenly false
+        :spacing 0
+    (cornerborder :orientation 0)
+    (topbotborder :orientation 0
+                  :width {bar_total_width - outer_padding - (border_radius * 2)})
+    (cornerborder :orientation 1)))
+
+(defwidget barmiddle []
+  (box  :orientation "h"
+        :width 70
+        :valign "fill"
+        :halign "fill"
+        :space-evenly false
+        :spacing 0
+    (sideborder :orientation 0
+                :height {monitor_info.height - (outer_padding * 2) - (border_radius  * 2)}
+                :halign "start")
+    (centerbox  :class "content"
+                (topcontainer)
+                (middlecontainer)
+                (bottomcontainer))
+    (sideborder :orientation 2
+                :halign "end"
+                :height {monitor_info.height - (outer_padding * 2) - (border_radius  * 2)})))
+
+(defwidget barbottom []
+  (box  :orientation "h"
+        :valign "end"
+        :halign "start"
+        :space-evenly false
+        :spacing 0
+    (cornerborder :orientation 3)
+    (topbotborder :orientation 2
+                  :width {bar_total_width - outer_padding - (border_radius * 2)})
+    (cornerborder :orientation 2)))
+
+;; Status Bar
+(defwindow statusbar
+  :monitor 0
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "90px"
+                      :height "100%"
+                      :anchor "left center")
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  (centerbox  :class "outer_bar_wrapper"
+              :orientation "v"
+              (bartop)
+              (barmiddle)
+              (barbottom)))
