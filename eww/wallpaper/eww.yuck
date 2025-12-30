@@ -1,6 +1,6 @@
 ;; Monitor Info
 ;; Image of Wallpaper 
-(defvar wallpaper_path "/home/david/Pictures/Wallpapers/Minimal_Squares.png")
+(defvar wallpaper_path "/home/david/Pictures/Wallpapers/a_white_light_pole_with_a_jet_trail_in_the_sky.jpg")
 (defwidget wallpaperimg [img_path]
             (image  :path img_path
                     :image-width {monitor_info.width}
