@@ -1,0 +1,43 @@
+@import url("colors.css");
+
+* {
+  font-family: "JetBrains Mono", "Symbols Nerd Font";
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  border-radius: 0px;
+}
+
+#waybar {
+  color: @foreground;
+  background-color: @background;
+}
+
+#workspaces button {
+  color: @foreground;
+}
+
+#workspaces button.active {
+  color: @foreground;
+  font-weight: bold;
+}
+
+#workspaces button.empty {
+  color: @foreground;
+}
+
+#workspaces,
+#memory,
+#custom-platform-profile {
+  margin: 0px 8px 0px 8px;
+}
+
+#wireplumber,
+#battery,
+#idle_inhibitor,
+#language,
+#network,
+#bluetooth,
+#tray {
+  margin: 0px 8px 0px 8px;
+}
