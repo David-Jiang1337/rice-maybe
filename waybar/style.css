@@ -13,13 +13,17 @@
   background-color: @background;
 }
 
+#workspaces button:hover {
+  background-color: @background;
+}
+
 #workspaces button {
   color: @foreground;
+  background-color: transparent;
 }
 
 #workspaces button.active {
   color: @foreground;
-  font-weight: bold;
 }
 
 #workspaces button.empty {
